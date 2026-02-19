@@ -6,6 +6,8 @@ export const TEMPLATE_DEFS = [
   { id: 'url', label: 'URL', defaultColor: '#000000', placeholder: 'ex: https://google.com' },
   { id: 'command', label: 'Commande', defaultColor: '#000000', placeholder: 'ex: notepad.exe ou "C:\\Path\\App.exe" --arg' },
   { id: 'app', label: 'App installee', defaultColor: '#000000', placeholder: 'Recherche app installee (.lnk/.exe)' },
+  { id: 'key_press', label: 'Inserer une touche', defaultColor: '#000000', placeholder: 'ex: F1, DELETE, !, a, 5' },
+  { id: 'multi_action', label: 'Multi-action', defaultColor: '#000000', placeholder: '' },
   { id: 'macro', label: 'Macro', defaultColor: '#000000', placeholder: 'ex: abc123' },
   { id: 'paste_text', label: 'Coller texte', defaultColor: '#000000', placeholder: 'Texte a coller via clavier' },
 ]
@@ -21,6 +23,8 @@ export function templateLabel(templateId) {
 export function actionTypeLabel(type) {
   if (type === 'url') return 'URL'
   if (type === 'app') return 'APP'
+  if (type === 'key_press') return 'KEY'
+  if (type === 'multi_action') return 'MULTI'
   if (type === 'macro') return 'MACRO'
   if (type === 'paste_text') return 'TEXT'
   return 'CMD'
@@ -35,6 +39,8 @@ export function normalizeActionType(value) {
   const t = String(value || '').trim().toLowerCase()
   if (t === 'url') return 'url'
   if (t === 'app') return 'app'
+  if (t === 'key_press') return 'key_press'
+  if (t === 'multi_action') return 'multi_action'
   if (t === 'macro') return 'macro'
   if (t === 'paste_text') return 'paste_text'
   return 'command'
@@ -84,6 +90,43 @@ export function parsePasteTextValue(value) {
     // plain fallback
   }
   return { text: String(value || '') }
+}
+
+export function parseMultiActionValue(value) {
+  const raw = String(value || '').trim()
+  if (!raw) return { steps: [] }
+  try {
+    const parsed = JSON.parse(raw)
+    if (parsed && typeof parsed === 'object' && Array.isArray(parsed.steps)) {
+      const steps = parsed.steps
+        .filter(step => step && typeof step === 'object')
+        .map(step => ({
+          name: String(step.name || step.label || '').slice(0, 30),
+          actionType: normalizeActionType(step.actionType),
+          value: String(step.value || ''),
+        }))
+        .filter(step => step.actionType !== 'multi_action')
+      return { steps }
+    }
+  } catch {
+    // ignore
+  }
+  return { steps: [] }
+}
+
+export function buildMultiActionValue(steps) {
+  const safeSteps = Array.isArray(steps)
+    ? steps
+        .filter(step => step && typeof step === 'object')
+        .map(step => ({
+          name: String(step.name || '').slice(0, 30),
+          actionType: normalizeActionType(step.actionType),
+          value: String(step.value || ''),
+        }))
+        .filter(step => step.actionType !== 'multi_action')
+    : []
+
+  return JSON.stringify({ steps: safeSteps })
 }
 
 export function profileLabel(id) {

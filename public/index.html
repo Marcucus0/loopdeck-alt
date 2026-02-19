@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loopdeck Studio</title>
-    <link rel="stylesheet" href="/styles.css?v=20260219b" />
+    <link rel="stylesheet" href="/styles.css?v=20260219c" />
   </head>
   <body>
     <main class="layout">
@@ -87,7 +87,7 @@
               </div>
             </div>
 
-            <div class="field">
+            <div class="field" id="valueField">
               <label id="valueLabel" for="valueInput">Valeur</label>
               <input id="valueInput" type="text" />
             </div>
@@ -95,6 +95,15 @@
             <div class="field hidden" id="macroDelayField">
               <label id="delayLabel" for="macroDelayInput">Temps entre touches (ms)</label>
               <input id="macroDelayInput" type="number" min="0" max="10000" step="10" />
+            </div>
+
+            <div class="field hidden" id="multiActionField">
+              <label>Etapes multi-action</label>
+              <div class="row">
+                <select id="multiActionWidgetSelect" class="grow"></select>
+                <button id="addMultiActionStepBtn" type="button">Ajouter</button>
+              </div>
+              <div id="multiActionSteps" class="multi-steps"></div>
             </div>
 
             <div class="hint" id="appHint"></div>
@@ -138,6 +147,6 @@
     <input id="importConfigInput" type="file" accept="application/json,.json" class="hidden" />
     <input id="iconFileInput" type="file" accept="image/*" class="hidden" />
     <datalist id="appCommands"></datalist>
-    <script type="module" src="/app.js?v=20260219b"></script>
+    <script type="module" src="/app.js?v=20260219c"></script>
   </body>
 </html>

@@ -701,18 +701,18 @@
     "home": [
       {
         "key": 0,
-        "label": "aaa",
+        "label": "fff",
         "color": "#ff0000",
-        "actionType": "macro",
-        "value": "{\"keys\":\"abc\",\"delayMs\":10}",
+        "actionType": "multi_action",
+        "value": "{\"steps\":[{\"name\":\"F8\",\"actionType\":\"key_press\",\"value\":\"F8\"},{\"name\":\"a\",\"actionType\":\"paste_text\",\"value\":\"pro-q 4\"},{\"name\":\"enter\",\"actionType\":\"key_press\",\"value\":\"ENTER\"}]}",
         "iconPath": ""
       },
       {
         "key": 1,
-        "label": "b",
-        "color": "#2b00ff",
-        "actionType": "paste_text",
-        "value": "abc",
+        "label": "Key 1",
+        "color": "#000000",
+        "actionType": "command",
+        "value": "",
         "iconPath": ""
       },
       {

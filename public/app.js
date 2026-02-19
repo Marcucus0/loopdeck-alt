@@ -12,10 +12,12 @@ import {
   normalizeActionType,
   normalizeColor,
   parseMacroValue,
+  parseMultiActionValue,
   parsePasteTextValue,
   profileLabel,
   templateById,
   templateLabel,
+  buildMultiActionValue,
 } from './widget-core.js'
 const keyGrid = document.getElementById('keyGrid')
 const profileButtons = document.getElementById('profileButtons')
@@ -42,9 +44,14 @@ const widgetTemplateInput = document.getElementById('widgetTemplateInput')
 const colorInput = document.getElementById('colorInput')
 const valueLabel = document.getElementById('valueLabel')
 const valueInput = document.getElementById('valueInput')
+const valueField = document.getElementById('valueField')
 const macroDelayField = document.getElementById('macroDelayField')
 const delayLabel = document.getElementById('delayLabel')
 const macroDelayInput = document.getElementById('macroDelayInput')
+const multiActionField = document.getElementById('multiActionField')
+const multiActionWidgetSelect = document.getElementById('multiActionWidgetSelect')
+const addMultiActionStepBtn = document.getElementById('addMultiActionStepBtn')
+const multiActionSteps = document.getElementById('multiActionSteps')
 const appHint = document.getElementById('appHint')
 const iconHint = document.getElementById('iconHint')
 const testBtn = document.getElementById('testBtn')
@@ -101,6 +108,7 @@ function createStorageSnapshot() {
       color: normalizeColor(widget.color),
       value: String(widget.value || ''),
       delayMs: clampDelayMs(widget.delayMs),
+      multiSteps: Array.isArray(widget.multiSteps) ? widget.multiSteps : [],
       iconPath: String(widget.iconPath || ''),
     }))
     assignmentsByProfile[profile] = Array.from({ length: KEY_COUNT }, (_, key) => {
@@ -152,6 +160,7 @@ function mergeWidgetStateWithStorage() {
       const actionType = normalizeActionType(raw.actionType)
       const parsedMacro = actionType === 'macro' ? parseMacroValue(raw.value) : null
       const parsedPaste = actionType === 'paste_text' ? parsePasteTextValue(raw.value) : null
+      const parsedMulti = actionType === 'multi_action' ? parseMultiActionValue(raw.value) : null
       localById.set(id, {
         id,
         name: String(raw.name || 'Widget').slice(0, 30),
@@ -159,6 +168,11 @@ function mergeWidgetStateWithStorage() {
         color: normalizeColor(raw.color),
         value: parsedMacro ? parsedMacro.keys : parsedPaste ? parsedPaste.text : String(raw.value || ''),
         delayMs: parsedMacro ? parsedMacro.delayMs : clampDelayMs(raw.delayMs),
+        multiSteps: parsedMulti
+          ? parsedMulti.steps
+          : Array.isArray(raw.multiSteps)
+            ? raw.multiSteps
+            : [],
         iconPath: String(raw.iconPath || ''),
       })
     }
@@ -258,6 +272,7 @@ function rebuildWidgetsFromConfig() {
       const actionType = normalizeActionType(item.actionType)
       const parsedMacro = actionType === 'macro' ? parseMacroValue(item.value) : null
       const parsedPaste = actionType === 'paste_text' ? parsePasteTextValue(item.value) : null
+      const parsedMulti = actionType === 'multi_action' ? parseMultiActionValue(item.value) : null
       const wid = `${profile}-k${key}`
       widgets.push({
         id: wid,
@@ -266,6 +281,7 @@ function rebuildWidgetsFromConfig() {
         color: normalizeColor(item.color),
         value: parsedMacro ? parsedMacro.keys : parsedPaste ? parsedPaste.text : String(item.value || ''),
         delayMs: parsedMacro ? parsedMacro.delayMs : 120,
+        multiSteps: parsedMulti ? parsedMulti.steps : [],
         iconPath: String(item.iconPath || ''),
       })
       assignments[key] = wid
@@ -302,6 +318,8 @@ function syncConfigFromWidgets(profile = state.selectedProfile) {
       value:
         normalizeActionType(widget.actionType) === 'macro'
           ? buildMacroValue(widget.value, widget.delayMs)
+          : normalizeActionType(widget.actionType) === 'multi_action'
+            ? buildMultiActionValue(widget.multiSteps)
           : String(widget.value || ''),
       iconPath: String(widget.iconPath || ''),
     }
@@ -321,6 +339,79 @@ function updateWidgetProfileAssignments(widgetId) {
     if (assignments[key] === widgetId) keys.push(key)
   }
   return keys
+}
+
+function serializeWidgetValue(widget) {
+  const actionType = normalizeActionType(widget.actionType)
+  if (actionType === 'macro') return buildMacroValue(widget.value, widget.delayMs)
+  if (actionType === 'multi_action') return buildMultiActionValue(widget.multiSteps)
+  return String(widget.value || '')
+}
+
+function stepFromWidget(widget) {
+  const actionType = normalizeActionType(widget.actionType)
+  if (actionType === 'multi_action') return null
+  return {
+    name: String(widget.name || '').slice(0, 30),
+    actionType,
+    value: serializeWidgetValue(widget),
+  }
+}
+
+function renderMultiActionEditor(widget) {
+  const isMulti = normalizeActionType(widget?.actionType) === 'multi_action'
+  multiActionField.classList.toggle('hidden', !isMulti)
+  if (!isMulti) return
+
+  const widgets = widgetsForProfile()
+    .filter(w => w.id !== widget.id && normalizeActionType(w.actionType) !== 'multi_action')
+    .sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }))
+
+  multiActionWidgetSelect.innerHTML = ''
+  const emptyOption = document.createElement('option')
+  emptyOption.value = ''
+  emptyOption.textContent = widgets.length ? 'Choisir un widget...' : 'Aucun widget disponible'
+  multiActionWidgetSelect.appendChild(emptyOption)
+
+  for (const item of widgets) {
+    const option = document.createElement('option')
+    option.value = item.id
+    option.textContent = `${item.name} (${templateLabel(item.actionType)})`
+    multiActionWidgetSelect.appendChild(option)
+  }
+  addMultiActionStepBtn.disabled = widgets.length === 0
+
+  const steps = Array.isArray(widget.multiSteps) ? widget.multiSteps : []
+  multiActionSteps.innerHTML = ''
+  if (!steps.length) {
+    const hint = document.createElement('div')
+    hint.className = 'hint'
+    hint.textContent = 'Aucune etape. Ajoute des widgets ci-dessus.'
+    multiActionSteps.appendChild(hint)
+    return
+  }
+
+  steps.forEach((step, index) => {
+    const row = document.createElement('div')
+    row.className = 'multi-step-row'
+
+    const badge = document.createElement('span')
+    badge.className = 'multi-step-type'
+    badge.textContent = actionTypeLabel(step.actionType)
+
+    const name = document.createElement('span')
+    name.className = 'multi-step-name'
+    name.textContent = step.name || `Etape ${index + 1}`
+
+    const remove = document.createElement('button')
+    remove.type = 'button'
+    remove.className = 'multi-step-remove ghost'
+    remove.dataset.stepIndex = String(index)
+    remove.textContent = 'x'
+
+    row.append(badge, name, remove)
+    multiActionSteps.appendChild(row)
+  })
 }
 
 function renderProfileButtons() {
@@ -371,7 +462,12 @@ function renderKeyGrid() {
       meta.className = 'slot-meta'
 
       const left = document.createElement('span')
-      left.textContent = widget.value ? widget.value.slice(0, 14) : '-'
+      if (normalizeActionType(widget.actionType) === 'multi_action') {
+        const count = Array.isArray(widget.multiSteps) ? widget.multiSteps.length : 0
+        left.textContent = `${count} action(s)`
+      } else {
+        left.textContent = widget.value ? widget.value.slice(0, 14) : '-'
+      }
 
       const right = document.createElement('span')
       right.className = 'slot-badge'
@@ -472,10 +568,14 @@ function renderEditor() {
     valueInput.value = ''
     valueInput.placeholder = ''
     valueInput.removeAttribute('list')
+    valueField.classList.remove('hidden')
     if (delayLabel) delayLabel.textContent = 'Temps entre touches (ms)'
     macroDelayField.classList.add('hidden')
     macroDelayInput.value = '120'
     macroDelayInput.disabled = true
+    multiActionField.classList.add('hidden')
+    multiActionWidgetSelect.innerHTML = ''
+    multiActionSteps.innerHTML = ''
     appHint.textContent = ''
     iconHint.textContent = ''
     return
@@ -484,19 +584,23 @@ function renderEditor() {
   const actionType = normalizeActionType(widget.actionType)
   const isMacro = actionType === 'macro'
   const isPasteText = actionType === 'paste_text'
+  const isKeyPress = actionType === 'key_press'
+  const isMultiAction = actionType === 'multi_action'
   editorTitle.textContent = `Widget: ${widget.name}`
   widgetNameInput.value = widget.name
   widgetTemplateInput.value = templateLabel(actionType)
   colorInput.value = normalizeColor(widget.color)
-  valueInput.value = widget.value
+  valueInput.value = isMultiAction ? '' : widget.value
 
   const template = templateById(actionType)
-  valueInput.placeholder = template?.placeholder || ''
-  valueLabel.textContent = isMacro ? 'Touches a presser' : isPasteText ? 'Texte a coller' : 'Valeur'
+  valueInput.placeholder = isMultiAction ? '' : template?.placeholder || ''
+  valueLabel.textContent = isMacro ? 'Touches a presser' : isPasteText ? 'Texte a coller' : isKeyPress ? 'Touche' : 'Valeur'
+  valueField.classList.toggle('hidden', isMultiAction)
   if (delayLabel) delayLabel.textContent = 'Temps entre touches (ms)'
   macroDelayField.classList.toggle('hidden', !isMacro)
   macroDelayInput.disabled = !isMacro
   macroDelayInput.value = String(clampDelayMs(widget.delayMs))
+  renderMultiActionEditor(widget)
 
   if (actionType === 'app') {
     valueInput.setAttribute('list', 'appCommands')
@@ -505,6 +609,13 @@ function renderEditor() {
   } else if (isMacro) {
     valueInput.removeAttribute('list')
     appHint.textContent = `Macro: ${Array.from(widget.value || '').length} touche(s), ${clampDelayMs(widget.delayMs)} ms entre chaque.`
+  } else if (isKeyPress) {
+    valueInput.removeAttribute('list')
+    appHint.textContent = 'Entrez une seule touche (ex: F1, DELETE, !, a, 5).'
+  } else if (isMultiAction) {
+    valueInput.removeAttribute('list')
+    const count = Array.isArray(widget.multiSteps) ? widget.multiSteps.length : 0
+    appHint.textContent = `Multi-action: ${count} etape(s).`
   } else if (isPasteText) {
     valueInput.removeAttribute('list')
     appHint.textContent = `Texte: ${Array.from(widget.value || '').length} caractere(s).`
@@ -578,6 +689,7 @@ function createWidgetFromDraft() {
     color: template.defaultColor,
     value: '',
     delayMs: 120,
+    multiSteps: [],
     iconPath: '',
   }
 }
@@ -989,6 +1101,38 @@ function attachEvents() {
   macroDelayInput.addEventListener('input', () => {
     updateSelectedWidget({ delayMs: clampDelayMs(macroDelayInput.value) })
     renderEditor()
+  })
+
+  addMultiActionStepBtn.addEventListener('click', () => {
+    const widget = widgetById(state.selectedWidgetId)
+    if (!widget || normalizeActionType(widget.actionType) !== 'multi_action') return
+
+    const sourceId = String(multiActionWidgetSelect.value || '')
+    if (!sourceId) return
+    const sourceWidget = widgetById(sourceId)
+    if (!sourceWidget) return
+
+    const step = stepFromWidget(sourceWidget)
+    if (!step) return
+    const current = Array.isArray(widget.multiSteps) ? widget.multiSteps : []
+    updateSelectedWidget({ multiSteps: [...current, step] })
+    renderEditor()
+    renderKeyGrid()
+  })
+
+  multiActionSteps.addEventListener('click', event => {
+    const remove = event.target.closest('button[data-step-index]')
+    if (!remove) return
+    const index = Number(remove.dataset.stepIndex)
+    if (!Number.isInteger(index) || index < 0) return
+    const widget = widgetById(state.selectedWidgetId)
+    if (!widget || normalizeActionType(widget.actionType) !== 'multi_action') return
+    const current = Array.isArray(widget.multiSteps) ? widget.multiSteps : []
+    if (index >= current.length) return
+    const next = current.filter((_, i) => i !== index)
+    updateSelectedWidget({ multiSteps: next })
+    renderEditor()
+    renderKeyGrid()
   })
 
   testBtn.addEventListener('click', async () => {
