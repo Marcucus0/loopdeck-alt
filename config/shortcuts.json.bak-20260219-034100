@@ -1,0 +1,800 @@
+{
+  "version": 2,
+  "activeProfile": "home",
+  "profileColors": {
+    "1": "#ffffff",
+    "2": "#ffffff",
+    "3": "#ffffff",
+    "4": "#ffffff",
+    "5": "#ffffff",
+    "6": "#ffffff",
+    "7": "#b30000",
+    "home": "#ffffff"
+  },
+  "profiles": {
+    "1": [
+      {
+        "key": 0,
+        "label": "Key 0",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 1,
+        "label": "Key 1",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 2,
+        "label": "Key 2",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 3,
+        "label": "Key 3",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 4,
+        "label": "Key 4",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 5,
+        "label": "Key 5",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 6,
+        "label": "Key 6",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 7,
+        "label": "Key 7",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 8,
+        "label": "Key 8",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 9,
+        "label": "Key 9",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 10,
+        "label": "Key 10",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 11,
+        "label": "Key 11",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      }
+    ],
+    "2": [
+      {
+        "key": 0,
+        "label": "Key 0",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 1,
+        "label": "Key 1",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 2,
+        "label": "Key 2",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 3,
+        "label": "Key 3",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 4,
+        "label": "Key 4",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 5,
+        "label": "Key 5",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 6,
+        "label": "Key 6",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 7,
+        "label": "Key 7",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 8,
+        "label": "Key 8",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 9,
+        "label": "Key 9",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 10,
+        "label": "Key 10",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 11,
+        "label": "Key 11",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      }
+    ],
+    "3": [
+      {
+        "key": 0,
+        "label": "Key 0",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 1,
+        "label": "Key 1",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 2,
+        "label": "Key 2",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 3,
+        "label": "Key 3",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 4,
+        "label": "Key 4",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 5,
+        "label": "Key 5",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 6,
+        "label": "Key 6",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 7,
+        "label": "Key 7",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 8,
+        "label": "Key 8",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 9,
+        "label": "Key 9",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 10,
+        "label": "Key 10",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 11,
+        "label": "Key 11",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      }
+    ],
+    "4": [
+      {
+        "key": 0,
+        "label": "Key 0",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 1,
+        "label": "Key 1",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 2,
+        "label": "Key 2",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 3,
+        "label": "Key 3",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 4,
+        "label": "Key 4",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 5,
+        "label": "Key 5",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 6,
+        "label": "Key 6",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 7,
+        "label": "Key 7",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 8,
+        "label": "Key 8",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 9,
+        "label": "Key 9",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 10,
+        "label": "Key 10",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 11,
+        "label": "Key 11",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      }
+    ],
+    "5": [
+      {
+        "key": 0,
+        "label": "Key 0",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 1,
+        "label": "Key 1",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 2,
+        "label": "Key 2",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 3,
+        "label": "Key 3",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 4,
+        "label": "Key 4",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 5,
+        "label": "Key 5",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 6,
+        "label": "Key 6",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 7,
+        "label": "Key 7",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 8,
+        "label": "Key 8",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 9,
+        "label": "Key 9",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 10,
+        "label": "Key 10",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 11,
+        "label": "Key 11",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      }
+    ],
+    "6": [
+      {
+        "key": 0,
+        "label": "Key 0",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 1,
+        "label": "Key 1",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 2,
+        "label": "Key 2",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 3,
+        "label": "Key 3",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 4,
+        "label": "Key 4",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 5,
+        "label": "Key 5",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 6,
+        "label": "Key 6",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 7,
+        "label": "Key 7",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 8,
+        "label": "Key 8",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 9,
+        "label": "Key 9",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 10,
+        "label": "Key 10",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 11,
+        "label": "Key 11",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      }
+    ],
+    "7": [
+      {
+        "key": 0,
+        "label": "Key 0",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 1,
+        "label": "Key 1",
+        "color": "#1f2937",
+        "actionType": "app",
+        "value": "\"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Image-Line\\FL Studio 2025.lnk\"",
+        "iconPath": "config/icons/key-7-1-1771466182015.png"
+      },
+      {
+        "key": 2,
+        "label": "Key 2",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 3,
+        "label": "Key 3",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 4,
+        "label": "Key 4",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 5,
+        "label": "Key 5",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 6,
+        "label": "Key 6",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 7,
+        "label": "Key 7",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 8,
+        "label": "Key 8",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 9,
+        "label": "Key 9",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 10,
+        "label": "Key 10",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 11,
+        "label": "Key 11",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      }
+    ],
+    "home": [
+      {
+        "key": 0,
+        "label": "Key 0",
+        "color": "#1f2937",
+        "actionType": "url",
+        "value": "https://google.be",
+        "iconPath": ""
+      },
+      {
+        "key": 1,
+        "label": "Key 1",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "notepad.exe",
+        "iconPath": ""
+      },
+      {
+        "key": 2,
+        "label": "OBS",
+        "color": "#000000",
+        "actionType": "app",
+        "value": "\"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OBS Studio.lnk\"",
+        "iconPath": "config/icons/key-home-2-1771468679596.png"
+      },
+      {
+        "key": 3,
+        "label": "Key 3",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 4,
+        "label": "Key 4",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 5,
+        "label": "Key 5",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 6,
+        "label": "Key 6",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 7,
+        "label": "Key 7",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 8,
+        "label": "Key 8",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 9,
+        "label": "Key 9",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 10,
+        "label": "Key 10",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      },
+      {
+        "key": 11,
+        "label": "Key 11",
+        "color": "#1f2937",
+        "actionType": "command",
+        "value": "",
+        "iconPath": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+﻿<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loopdeck Shortcuts</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <h1>Loopdeck Shortcuts</h1>
+        <p>Configure 8 profils indépendants (HOME + 1..7) de 12 touches chacun.</p>
+      </header>
+
+      <section class="status" id="statusPanel">
+        <div>
+          <span class="label">Appareil</span>
+          <span id="deviceState">...</span>
+        </div>
+        <div>
+          <span class="label">Dernier événement</span>
+          <span id="lastEvent">...</span>
+        </div>
+      </section>
+
+      <section>
+        <div class="actions">
+          <div id="profileTabs" class="profile-tabs"></div>
+          <div class="profile-led">
+            <label for="profileLedColor">LED profil</label>
+            <input id="profileLedColor" type="color" value="#ffffff" />
+          </div>
+          <button id="saveBtn" type="button">Sauvegarder la config</button>
+          <button id="reloadBtn" type="button" class="ghost">Recharger</button>
+        </div>
+
+        <div id="messageBox" class="message hidden"></div>
+        <div id="grid" class="grid"></div>
+      </section>
+    </main>
+    <datalist id="appCommands"></datalist>
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "loopdeck-alt",
+  "version": "1.0.0",
+  "description": "Local Loupedeck Live shortcuts app with multi-profiles",
+  "scripts": {
+    "start": "node app.mjs",
+    "fill": "node fill-white.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "jimp": "^1.6.0",
+    "loupedeck": "^7.0.3"
+  }
+}

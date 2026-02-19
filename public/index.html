@@ -1,0 +1,143 @@
+﻿<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loopdeck Studio</title>
+    <link rel="stylesheet" href="/styles.css?v=20260219b" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="left-stage">
+        <div class="ambient-glow"></div>
+        <div class="device-shell" aria-label="Loupedeck visuel">
+          <div class="knob knob-l1"></div>
+          <div class="knob knob-l2"></div>
+          <div class="knob knob-l3"></div>
+          <div class="knob knob-r1"></div>
+          <div class="knob knob-r2"></div>
+          <div class="knob knob-r3"></div>
+
+          <section class="device-screen-frame">
+            <div class="side-screen"></div>
+            <div class="center-grid" id="keyGrid" aria-label="Grille 12 touches tactiles"></div>
+            <div class="side-screen"></div>
+          </section>
+
+          <section class="profile-row" id="profileButtons" aria-label="Profils"></section>
+        </div>
+      </section>
+
+      <aside class="right-panel">
+        <header class="panel-topbar">
+          <label class="search-wrap" for="searchInput">
+            <input id="searchInput" type="search" placeholder="Rechercher un widget" />
+            <span class="search-icon">Q</span>
+          </label>
+          <div class="menu-wrap">
+            <button id="menuBtn" class="top-btn" type="button">Config</button>
+            <div id="configMenu" class="menu-panel hidden">
+              <button id="importConfigBtn" type="button">Importer config</button>
+              <button id="exportConfigBtn" type="button">Exporter config</button>
+              <button id="resetConfigBtn" class="danger" type="button">Reset defaut</button>
+            </div>
+          </div>
+          <button id="saveBtn" class="top-btn" type="button">Save</button>
+          <button id="reloadBtn" class="top-btn" type="button">Reload</button>
+        </header>
+
+        <section class="panel-main">
+          <div class="panel-statusline">
+            <span class="status-badge" id="serverBadge">Serveur ...</span>
+            <span class="status-badge" id="deviceBadge">Appareil ...</span>
+          </div>
+
+          <h2>Actions de la console Loupedeck</h2>
+          <div class="event-line" id="eventLine">Dernier evenement: -</div>
+          <div class="message hidden" id="messageBox"></div>
+
+          <section class="widget-library">
+            <div class="widget-library-head">
+              <h3>Widgets crees</h3>
+              <button id="createWidgetBtn" class="plus-btn" type="button" aria-label="Creer widget">+</button>
+            </div>
+            <p>Glisse un widget cree sur une touche tactile.</p>
+            <div class="widget-list" id="widgetList"></div>
+          </section>
+
+          <section class="editor" id="editorPanel">
+            <div class="editor-head">
+              <h3 id="editorTitle">Widget</h3>
+              <button id="testBtn" class="test-btn" type="button">Tester</button>
+            </div>
+
+            <div class="field">
+              <label for="widgetNameInput">Nom</label>
+              <input id="widgetNameInput" type="text" maxlength="30" />
+            </div>
+
+            <div class="row">
+              <div class="field grow">
+                <label>Template</label>
+                <input id="widgetTemplateInput" type="text" readonly />
+              </div>
+              <div class="field color-field">
+                <label for="colorInput">Couleur</label>
+                <input id="colorInput" type="color" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label id="valueLabel" for="valueInput">Valeur</label>
+              <input id="valueInput" type="text" />
+            </div>
+
+            <div class="field hidden" id="macroDelayField">
+              <label id="delayLabel" for="macroDelayInput">Temps entre touches (ms)</label>
+              <input id="macroDelayInput" type="number" min="0" max="10000" step="10" />
+            </div>
+
+            <div class="hint" id="appHint"></div>
+            <div class="hint" id="iconHint"></div>
+
+            <div class="row">
+              <button id="uploadIconBtn" type="button">Icone perso</button>
+              <button id="clearIconBtn" class="ghost" type="button">Retirer icone</button>
+            </div>
+          </section>
+        </section>
+      </aside>
+    </main>
+
+    <div id="createModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="createModalTitle">
+      <div class="modal-card">
+        <h3 id="createModalTitle">Creer un widget</h3>
+
+        <div class="field">
+          <label>Template</label>
+          <div class="template-list" id="templateList"></div>
+        </div>
+
+        <div class="field">
+          <label for="createNameInput">Nom</label>
+          <input id="createNameInput" type="text" maxlength="30" placeholder="Nom du widget" />
+        </div>
+
+        <div class="modal-actions">
+          <button id="cancelCreateBtn" class="ghost" type="button">Cancel</button>
+          <button id="confirmCreateBtn" type="button" disabled>Create</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="widgetContextMenu" class="context-menu hidden" role="menu" aria-label="Menu widget">
+      <button id="ctxCloneBtn" type="button" role="menuitem">Cloner</button>
+      <button id="ctxDeleteBtn" class="danger" type="button" role="menuitem">Supprimer</button>
+    </div>
+
+    <input id="importConfigInput" type="file" accept="application/json,.json" class="hidden" />
+    <input id="iconFileInput" type="file" accept="image/*" class="hidden" />
+    <datalist id="appCommands"></datalist>
+    <script type="module" src="/app.js?v=20260219b"></script>
+  </body>
+</html>
