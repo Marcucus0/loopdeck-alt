@@ -2,14 +2,14 @@
   "version": 2,
   "activeProfile": "home",
   "profileColors": {
-    "1": "#ffffff",
+    "1": "#00ff04",
     "2": "#ffffff",
     "3": "#ffffff",
     "4": "#ffffff",
     "5": "#ffffff",
     "6": "#ffffff",
     "7": "#ffffff",
-    "home": "#ffffff"
+    "home": "#0055ff"
   },
   "profiles": {
     "1": [
@@ -702,7 +702,7 @@
       {
         "key": 0,
         "label": "fff",
-        "color": "#ff0000",
+        "color": "#fe0101",
         "actionType": "multi_action",
         "value": "{\"steps\":[{\"name\":\"F8\",\"actionType\":\"key_press\",\"value\":\"F8\"},{\"name\":\"a\",\"actionType\":\"paste_text\",\"value\":\"pro-q 4\"},{\"name\":\"enter\",\"actionType\":\"key_press\",\"value\":\"ENTER\"}]}",
         "iconPath": ""

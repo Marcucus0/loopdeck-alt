@@ -6,6 +6,7 @@ export const TEMPLATE_DEFS = [
   { id: 'url', label: 'URL', defaultColor: '#000000', placeholder: 'ex: https://google.com' },
   { id: 'command', label: 'Commande', defaultColor: '#000000', placeholder: 'ex: notepad.exe ou "C:\\Path\\App.exe" --arg' },
   { id: 'app', label: 'App installee', defaultColor: '#000000', placeholder: 'Recherche app installee (.lnk/.exe)' },
+  { id: 'app_volume', label: 'Mixer app', defaultColor: '#000000', placeholder: 'App cible (ex: spotify.exe ou chemin .exe/.lnk)' },
   { id: 'key_press', label: 'Inserer une touche', defaultColor: '#000000', placeholder: 'ex: F1, DELETE, !, a, 5' },
   { id: 'multi_action', label: 'Multi-action', defaultColor: '#000000', placeholder: '' },
   { id: 'macro', label: 'Macro', defaultColor: '#000000', placeholder: 'ex: abc123' },
@@ -23,6 +24,7 @@ export function templateLabel(templateId) {
 export function actionTypeLabel(type) {
   if (type === 'url') return 'URL'
   if (type === 'app') return 'APP'
+  if (type === 'app_volume') return 'VOL'
   if (type === 'key_press') return 'KEY'
   if (type === 'multi_action') return 'MULTI'
   if (type === 'macro') return 'MACRO'
@@ -39,6 +41,7 @@ export function normalizeActionType(value) {
   const t = String(value || '').trim().toLowerCase()
   if (t === 'url') return 'url'
   if (t === 'app') return 'app'
+  if (t === 'app_volume') return 'app_volume'
   if (t === 'key_press') return 'key_press'
   if (t === 'multi_action') return 'multi_action'
   if (t === 'macro') return 'macro'

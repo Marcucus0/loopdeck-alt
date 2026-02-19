@@ -414,17 +414,60 @@ function renderMultiActionEditor(widget) {
   })
 }
 
+function hexToRgb(color) {
+  const value = normalizeColor(color, '#ffffff').slice(1)
+  return {
+    r: parseInt(value.slice(0, 2), 16),
+    g: parseInt(value.slice(2, 4), 16),
+    b: parseInt(value.slice(4, 6), 16),
+  }
+}
+
+function mixRgb(base, target, amount) {
+  const t = Math.max(0, Math.min(1, Number(amount) || 0))
+  return {
+    r: Math.round(base.r + (target.r - base.r) * t),
+    g: Math.round(base.g + (target.g - base.g) * t),
+    b: Math.round(base.b + (target.b - base.b) * t),
+  }
+}
+
+function rgbToCss(rgb) {
+  return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
+}
+
 function renderProfileButtons() {
   profileButtons.innerHTML = ''
   for (const profile of PROFILE_IDS) {
+    const baseColor = normalizeColor(state.currentConfig?.profileColors?.[profile], '#ffffff')
+    const baseRgb = hexToRgb(baseColor)
+    const light = rgbToCss(mixRgb(baseRgb, { r: 255, g: 255, b: 255 }, 0.3))
+    const dark = rgbToCss(mixRgb(baseRgb, { r: 0, g: 0, b: 0 }, 0.62))
+
+    const item = document.createElement('div')
+    item.className = 'profile-item'
+
     const btn = document.createElement('button')
     btn.type = 'button'
     btn.className = 'profile-btn'
     btn.dataset.profile = profile
     btn.textContent = profileLabel(profile)
+    btn.style.setProperty('--profile-light', light)
+    btn.style.setProperty('--profile-dark', dark)
+    btn.style.setProperty('--profile-ring', baseColor)
     if (profile === state.selectedProfile) btn.classList.add('selected')
     if (profile === state.currentConfig?.activeProfile) btn.classList.add('active')
-    profileButtons.appendChild(btn)
+
+    const ledInput = document.createElement('input')
+    ledInput.type = 'color'
+    ledInput.className = 'profile-led-input'
+    ledInput.dataset.profile = profile
+    ledInput.value = baseColor
+    ledInput.title = `Couleur LED profil ${profileLabel(profile)}`
+    ledInput.setAttribute('aria-label', `Couleur LED profil ${profileLabel(profile)}`)
+
+    item.append(btn, ledInput)
+    profileButtons.appendChild(item)
   }
 }
 
@@ -602,10 +645,16 @@ function renderEditor() {
   macroDelayInput.value = String(clampDelayMs(widget.delayMs))
   renderMultiActionEditor(widget)
 
-  if (actionType === 'app') {
+  if (actionType === 'app' || actionType === 'app_volume') {
     valueInput.setAttribute('list', 'appCommands')
     const hit = state.installedApps.find(app => app.command.toLowerCase() === widget.value.toLowerCase())
-    appHint.textContent = hit ? `App detectee: ${hit.name}` : `Apps disponibles: ${state.filteredApps.length || state.installedApps.length}`
+    if (actionType === 'app_volume') {
+      appHint.textContent = hit
+        ? `Mixer: ${hit.name}. Le volume se regle via les potards du Loupedeck.`
+        : 'Mixer: choisis une app lancee (commande/chemin .exe ou .lnk), puis utilise les potards.'
+    } else {
+      appHint.textContent = hit ? `App detectee: ${hit.name}` : `Apps disponibles: ${state.filteredApps.length || state.installedApps.length}`
+    }
   } else if (isMacro) {
     valueInput.removeAttribute('list')
     appHint.textContent = `Macro: ${Array.from(widget.value || '').length} touche(s), ${clampDelayMs(widget.delayMs)} ms entre chaque.`
@@ -940,6 +989,24 @@ function attachEvents() {
     if (!btn) return
     clearMessage()
     setActiveProfile(btn.dataset.profile).catch(() => {})
+  })
+
+  profileButtons.addEventListener('change', event => {
+    const input = event.target.closest('input.profile-led-input[data-profile]')
+    if (!input) return
+    const profile = String(input.dataset.profile || '')
+    if (!PROFILE_IDS.includes(profile)) return
+    if (!state.currentConfig) return
+
+    const color = normalizeColor(input.value, '#ffffff')
+    state.currentConfig.profileColors = state.currentConfig.profileColors && typeof state.currentConfig.profileColors === 'object'
+      ? { ...state.currentConfig.profileColors }
+      : {}
+    state.currentConfig.profileColors[profile] = color
+
+    renderProfileButtons()
+    scheduleAutoSave()
+    showMessage(`LED ${profileLabel(profile)}: ${color}`, 'ok')
   })
 
   keyGrid.addEventListener('click', event => {
