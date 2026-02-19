@@ -1093,6 +1093,22 @@ function attachEvents() {
         throw new Error('JSON invalide.')
       }
 
+      // Import strategy: hard reset -> apply imported config.
+      // Also clear local widget cache to avoid stale merge artifacts.
+      if (state.autoSaveTimer) {
+        clearTimeout(state.autoSaveTimer)
+        state.autoSaveTimer = null
+      }
+      state.saveQueued = false
+      state.saveInFlight = false
+      localStorage.removeItem(WIDGET_STATE_STORAGE_KEY)
+
+      await fetchJson('/api/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(defaultConfig()),
+      })
+
       const saved = await fetchJson('/api/config', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1103,7 +1119,6 @@ function attachEvents() {
       state.selectedProfile = state.currentConfig.activeProfile || 'home'
       state.selectedKey = 0
       rebuildWidgetsFromConfig()
-      mergeWidgetStateWithStorage()
       persistWidgetState()
       if (!state.selectedWidgetId) state.selectedWidgetId = widgetsForProfile()[0]?.id || null
 
